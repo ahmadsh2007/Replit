@@ -79,9 +79,39 @@ def main() -> None:
             name = input('What is the User Name? ')
             email = input('What is the User Email? ')
             SQLFunctions.createUser(name, email)
-            notifyUser('User created successfully!')
+            notifyUser('User Created!')
         elif action == 'Create User Details':
-            pass
+            userID = input('What is the User ID? ')
+            PhoneNumber = input('What is the User Phone Number? ')
+            Prefrences = input('What is the User Prefrences? ')
+            Address = input('What is the User Address? ')
+            SQLFunctions.createUserDetails(userID, PhoneNumber, Prefrences, Address)
+            notifyUser('User Details Created!')
+        elif action == 'Create Task':
+            userID = input('What is the User ID? ')
+            Description = input('What is the Task Description? ')
+            DueTime = input('What is the Task Due Time? ')
+            Status = input('What is the Task Status? ')
+            SQLFunctions.createTask(userID, Description, DueTime, Status)
+            notifyUser('Task Created!')
+        elif action == 'Create Tag':
+            Name = input('What is the Tag Name? ')
+            SQLFunctions.createTag(Name)
+            notifyUser('Tag Created!')
+        elif action == 'Assign Tag to Task':
+            TagID = input('What is the Tag ID? ')
+            TaskID = input('What is the Task ID? ')
+            SQLFunctions.createTaskTagRelation(TagID, TaskID)
+            notifyUser('Tag Assigned to Task!')
+        elif action == 'Fetch All Users':
+            users = SQLFunctions.readUsers()
+            print(f'All Users: {str(users)}\n')
+        elif action == 'Fetch All Tasks':
+            tasks = SQLFunctions.readTasks()
+            print(f'(TaskID, UserID, Description, Due Time, Status)')
+            print(f'All Tasks: {str(tasks)}\n')
+        else:
+            notifyUser('Invalid action!')
 
 
 if __name__ == '__main__':
