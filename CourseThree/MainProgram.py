@@ -1,5 +1,4 @@
 from termcolor import colored
-from inquirer import *
 from art import *
 import inquirer
 import sys  
@@ -77,8 +76,8 @@ def main() -> None:
             print(text2art('Goodbye!'))
             break
         elif action == 'Create User':
-            name = prompt('What is the User Name? ')
-            email = prompt('What is the User Email? ')
+            name = input('What is the User Name? ')
+            email = input('What is the User Email? ')
             SQLFunctions.createUser(name, email)
             notifyUser('User created successfully!')
         elif action == 'Create User Details':
