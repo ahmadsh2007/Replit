@@ -1,4 +1,5 @@
 from termcolor import colored
+from inquirer import *
 from art import *
 import inquirer
 import sys  
@@ -6,6 +7,7 @@ import os
 
 # MY CODES
 import SQLdataset
+import SQLFunctions
 
 
 def currentDirectory():
@@ -16,6 +18,9 @@ def currentDirectory():
     return sys.path.append(scriptDir)
 
 
+def notifyUser(Message) -> None:
+    print(colored(text2art(Message), 'green'))
+
 def main() -> None:
     currentDirectory()
     ASCIIBanner = text2art("Task Manager")
@@ -24,7 +29,7 @@ def main() -> None:
     print('This is a Task Manager application to manage your daily tasks.\n')
     print('Please choose what do you want to do: ')
 
-    actions: list = [
+    '''actions: list = [
         "Create User",
         "Create User Details",
         "Create Task",
@@ -47,7 +52,19 @@ def main() -> None:
         "Delete Task",
         "Delete Tag",
         "Exit"
+    ]'''
+
+    actions: list = [
+        "Create User",
+        "Create User Details",
+        "Create Task",
+        "Create Tag",
+        "Assign Tag to Task",
+        "Fetch All Users",
+        "Fetch All Tasks",
+        "Exit"
     ]
+
 
     while True:
         action = inquirer.prompt([inquirer.List(
@@ -59,7 +76,13 @@ def main() -> None:
         if action == 'Exit':
             print(text2art('Goodbye!'))
             break
-
+        elif action == 'Create User':
+            name = prompt('What is the User Name? ')
+            email = prompt('What is the User Email? ')
+            SQLFunctions.createUser(name, email)
+            notifyUser('User created successfully!')
+        elif action == 'Create User Details':
+            pass
 
 
 if __name__ == '__main__':
