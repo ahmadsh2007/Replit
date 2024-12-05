@@ -66,7 +66,7 @@ def readUserDetails(UserDetailsID) -> list[any]:
 
 def createUserDetails(UserID, PhoneNumber, Prefrences, Address) -> None:
     connection = getConnection()
-    connection.execute('INSERT INTO UserDetails (UserID, PhoneNumber, Prefrences, Address) VALUES (?, ?, ?);', 
+    connection.execute('INSERT INTO UserDetails (UserID, PhoneNumber, Prefrences, Address) VALUES (?, ?, ?, ?);', 
                        (UserID, PhoneNumber, Prefrences, Address))
 
     connection.commit()
@@ -89,14 +89,22 @@ def deleteUserDetails(UserDetailsID) -> None:
 
 
 # ===============TASKS DATABASE===============
-def readTask(TaskID) -> list[any]:
+def readTasks() -> list[any]:
     connection = getConnection()
-    cursor = connection.execute('SELECT * FROM Tasks WHERE TaskID = ?;', (TaskID,))
+    cursor = connection.execute('SELECT * FROM Tasks;')
     tasks = cursor.fetchall()
 
     connection.close()
 
     return tasks
+
+def readTask(TaskID) -> list[any]:
+    connection = getConnection()
+    cursor = connection.execute('SELECT * FROM Tasks WHERE TaskID = ?;', (TaskID,))
+    choosenTasks = cursor.fetchall()
+    connection.close()
+
+    return choosenTasks
 
 def createTask(UserID, Description, DueTime, Status) -> None:
     connection = getConnection()
