@@ -7,14 +7,13 @@ import os
 # MY CODES
 import SQLdataset
 
+
 def currentDirectory():
     # Get the directory of the current script
     scriptDir: str = os.path.dirname(os.path.abspath(__file__))
 
     # Add this directory to the system path
     return sys.path.append(scriptDir)
-
-
 
 
 def main() -> None:
@@ -50,15 +49,16 @@ def main() -> None:
         "Exit"
     ]
 
-    action: list | any = inquirer.List(
-        "action",
-        message="What do you want to do?",
-        choices=actions
-    )
+    while True:
+        action = inquirer.prompt([inquirer.List(
+            "action",
+            message="What do you want to do?",
+            choices=actions
+        )])['action']
 
-    actionPrompting = inquirer.prompt([action])
-
-    print(actionPrompting['action'])
+        if action == 'Exit':
+            print(text2art('Goodbye!'))
+            break
 
 
 
