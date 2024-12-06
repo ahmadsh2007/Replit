@@ -1,5 +1,6 @@
 from termcolor import colored
 from art import *
+from prettytable import PrettyTable
 import inquirer
 import sys  
 import os
@@ -104,10 +105,32 @@ def main() -> None:
             SQLFunctions.createTaskTagRelation(TagID, TaskID)
             notifyUser('Tag Assigned to Task!')
         elif action == 'Fetch All Users':
-            SQLFunctions.readUsers()
+            # The Old Way
+            # SQLFunctions.readUsers()
+            # print('\n')
+
+            # The New Way
+            users = SQLFunctions.readUsers()
+            usersTable = PrettyTable(['UserID', 'UserName', 'EmailAddress'])
+
+            for user in users:
+                usersTable.add_row(user)
+
+            print(usersTable)
             print('\n')
         elif action == 'Fetch All Tasks':
-            SQLFunctions.readTasks()
+            # The Old Way
+            # SQLFunctions.readTasks()
+            # print('\n')
+
+            # The New Way
+            tasks = SQLFunctions.readTasks()
+            tasksTable = PrettyTable(['TaskID', 'UserID', 'Description', 'DueTime', 'Status'])
+
+            for task in tasks:
+                tasksTable.add_row(task)
+
+            print(tasksTable)
             print('\n')
         else:
             notifyUser('Invalid action!')

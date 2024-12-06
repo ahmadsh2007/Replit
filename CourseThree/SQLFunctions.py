@@ -21,13 +21,16 @@ def readUsers() -> None:
 
     connection.close()
 
-    # Print headers with fixed-width formatting
-    print(f'{"UserID":<10} {"UserName":<15} {"EmailAddress":<30}')
-    print('-' * 55)
+    # The Old Way
+    # # Print headers with fixed-width formatting
+    # print(f'{"UserID":<10} {"UserName":<15} {"EmailAddress":<30}')
+    # print('-' * 55)
 
-    # Print each user with fixed-width formatting
-    for user in users:
-        print(f'{user[0]:<10} {user[1]:<15} {user[2]:<30}')
+    # # Print each user with fixed-width formatting
+    # for user in users:
+    #     print(f'{user[0]:<10} {user[1]:<15} {user[2]:<30}')
+
+    return users
     
 def readUser(UserID) -> list[any]:
     connection = getConnection()
@@ -102,13 +105,16 @@ def readTasks() -> list[any]:
 
     connection.close()
 
-    # Print headers with fixed-width formatting
-    print(f'{"TaskID":<10} {"UserID":<10} {"Description":<20} {"DueTime":<15} {"Status":<10}')
-    print('-' * 65)
+    # The Old Way
+    # # Print headers with fixed-width formatting
+    # print(f'{"TaskID":<10} {"UserID":<10} {"Description":<20} {"DueTime":<15} {"Status":<10}')
+    # print('-' * 65)
 
-    # Print each task with fixed-width formatting
-    for task in tasks:
-        print(f'{task[0]:<10} {task[1]:<10} {task[2]:<20} {task[3]:<15} {task[4]:<10}')
+    # # Print each task with fixed-width formatting
+    # for task in tasks:
+    #     print(f'{task[0]:<10} {task[1]:<10} {task[2]:<20} {task[3]:<15} {task[4]:<10}')
+
+    return tasks
 
 def readTask(TaskID) -> list[any]:
     connection = getConnection()
