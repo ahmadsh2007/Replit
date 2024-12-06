@@ -90,7 +90,7 @@ def main() -> None:
         elif action == 'Create Task':
             userID = input('What is the User ID? ')
             Description = input('What is the Task Description? ')
-            DueTime = input('What is the Task Due Time? ')
+            DueTime = input('What is the Task Due Time (YYYY-MM-DD HH:MM)? ')
             Status = input('What is the Task Status? ')
             SQLFunctions.createTask(userID, Description, DueTime, Status)
             notifyUser('Task Created!')
@@ -104,12 +104,11 @@ def main() -> None:
             SQLFunctions.createTaskTagRelation(TagID, TaskID)
             notifyUser('Tag Assigned to Task!')
         elif action == 'Fetch All Users':
-            users = SQLFunctions.readUsers()
-            print(f'All Users: {str(users)}\n')
+            SQLFunctions.readUsers()
+            print('\n')
         elif action == 'Fetch All Tasks':
-            tasks = SQLFunctions.readTasks()
-            print(f'(TaskID, UserID, Description, Due Time, Status)')
-            print(f'All Tasks: {str(tasks)}\n')
+            SQLFunctions.readTasks()
+            print('\n')
         else:
             notifyUser('Invalid action!')
 
