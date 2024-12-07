@@ -3,7 +3,7 @@ import sys
 import os
 
 from DatabaseHandler import DatabaseHandler
-from RegistrationForm import RegeristrationForm
+from RegistrationForm import RegistrationForm
 
 def currentDirectory():
     """
@@ -35,7 +35,8 @@ class MainApplication(tk.Tk):
         titleLabel = tk.Label(self, text="Student Management System", font=("Helvetica", 10))
         titleLabel.pack(side='top', fill='x')
 
-        self.registrationForm = RegeristrationForm()
+        self.RegistrationForm = RegistrationForm(self)
+        self.RegistrationForm.pack(side='left')
 
 
 
