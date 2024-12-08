@@ -1,7 +1,7 @@
 import sqlite3
 
 class DatabaseHandler:
-    DatabaseName: str = "students.db"
+    DatabaseName: str = r"Course Desktop Application/students.db"
 
     @staticmethod
     def _connect() -> sqlite3.Connection:
