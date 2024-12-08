@@ -36,7 +36,7 @@ class MainApplication(tk.Tk):
         titleLabel.pack(side='top', fill='x')
 
         self.RegistrationForm = RegistrationForm(self)
-        self.RegistrationForm.pack(side='left')
+        self.RegistrationForm.pack(side='left', fill='y', padx=10, pady=10)
 
 
 
