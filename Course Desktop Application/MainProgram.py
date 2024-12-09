@@ -2,8 +2,9 @@ import tkinter as tk
 import sys
 import os
 
-from DatabaseHandler import DatabaseHandler
 from RegistrationForm import RegistrationForm
+from StudentListFrame import StudentListFrame
+from DatabaseHandler import DatabaseHandler
 
 def currentDirectory():
     """
@@ -35,14 +36,17 @@ class MainApplication(tk.Tk):
         titleLabel = tk.Label(self, text="Student Management System", font=("Helvetica", 10))
         titleLabel.pack(side='top', fill='x')
 
-        self.RegistrationForm = RegistrationForm(self)
+        self.RegistrationForm = RegistrationForm(self, self.refreshList)
         self.RegistrationForm.pack(side='left', fill='y', padx=10, pady=10)
 
+        self.studentListFrame = StudentListFrame(self)
+        self.studentListFrame.pack(side='right', fill='both', expand=True, padx=10, pady=10)
+
+    def refreshList(self) -> None:
+        self.studentListFrame.loadStudents()
 
 
 if __name__ == "__main__":
     currentDirectory()
     app = MainApplication()
     app.mainloop()
-    db = DatabaseHandler()
-    print(db.fetchAllStudents())
