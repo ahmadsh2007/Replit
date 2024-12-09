@@ -4,8 +4,10 @@ import tkinter as tk
 from DatabaseHandler import DatabaseHandler
 
 class RegistrationForm(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, refreshCallback):
         super().__init__(parent, padx=10, pady=10)
+
+        self.refreshCallback = refreshCallback
 
         tk.Label(self, text="Full Name").pack()
         self.nameEntry = tk.Entry(self)
@@ -47,11 +49,11 @@ class RegistrationForm(tk.Frame):
         phone = self.phoneEntry.get()
         gender = self.genderVar.get()
 
-        if name and age and email and phone and gender:
+        if all((name, age, email, phone, gender)):
             DatabaseHandler.insertStudent(name, age, email, phone, gender)
 
-            # Clear the form
             self.clearForm()
-
-            # Show success message
-            self.showInfo("Registration successful!")        
+            self.refreshCallback()
+            self.showInfo("Registration Successful")
+        else:
+            self.showInfo("Please Fill in All the Fields.")    
