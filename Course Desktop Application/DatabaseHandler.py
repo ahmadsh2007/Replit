@@ -28,7 +28,7 @@ class DatabaseHandler:
     @staticmethod
     def fetchAllStudents() -> list:
         with DatabaseHandler._connect() as conn:
-            return conn.execute("SELECT * FROM students")
+            return conn.execute("SELECT * FROM students").fetchall()
         
 try:
     DatabaseHandler.createTable()
