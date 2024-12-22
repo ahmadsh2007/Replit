@@ -2,9 +2,9 @@ from wtforms import StringField, TextAreaField, SubmitField
 from flask.templating import render_template
 from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, redirect, url_for
 from flask_wtf import FlaskForm
 from datetime import datetime
-from flask import Flask
 
 
 app = Flask(__name__)
@@ -39,10 +39,22 @@ def index():
 @app.route('/create', methods=['GET', 'POST'])
 def createEvents():
     form = EventForm()
+    if form.validate_on_submit():
+        event = Event()
+        event.title = form.title.data
+        event.description = form.description.data
+
+        db.session.add(event)
+        db.session.commit()
+
+        return redirect(url_for('index'))
+    
     return render_template('createEvent.html', form=form)
 
 
 
 
 if __name__ == '__main__':
+#   with app.app_context():
+#     db.create_all()
   app.run(host='0.0.0.0', port=5000, debug=True)
