@@ -1,7 +1,21 @@
-from flask import Flask
 from flask.templating import render_template
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from flask import Flask
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
+
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    datePosted = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"Event('{self.title}', '{self.datePosted}')"
 
 @app.route('/')
 @app.route('/home')
