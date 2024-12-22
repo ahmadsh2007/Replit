@@ -72,24 +72,24 @@ footer{
     color: #666;
 }
 
-from div{
+form div{
     margin-bottom: 10px;
 }
 
-from label{
+form label{
     display: block;
     margin-bottom: 5px;
 }
 
-from input[type="text"],
-from textarea{
+form input[type="text"],
+form textarea{
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
 
-from input[type="submit"]{
+form input[type="submit"]{
     display: block;
     width: 100%;
     padding: 10px;
@@ -100,6 +100,6 @@ from input[type="submit"]{
     cursor: pointer;
 }
 
-from input[type="submit"]:hover{
+form input[type="submit"]:hover{
     background: #a11d1d;
 }
