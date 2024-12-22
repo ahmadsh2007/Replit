@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Create Events {% endblock %}
 
 {% block content %}
-<p>This is create event page</p>
+
+<h2>Create Event</h2>
+
+<form>
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.title.label }}
+        {{ form.title }}
+    </div>
+    <div>
+        {{ form.description.label }}
+        {{ form.description }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
 {% endblock %}

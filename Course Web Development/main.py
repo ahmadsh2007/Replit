@@ -1,14 +1,24 @@
+from wtforms import StringField, TextAreaField, SubmitField
 from flask.templating import render_template
+from wtforms.validators import DataRequired
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
 from datetime import datetime
 from flask import Flask
 
-from forms import EventForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-
+app.config['SECRET_KEY'] = 'Ahmad Learns'
 db = SQLAlchemy(app)
+
+
+class EventForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+
+    submit = SubmitField('Create Event')
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,15 +29,19 @@ class Event(db.Model):
     def __repr__(self):
         return f"Event('{self.title}', '{self.datePosted}')"
 
+
 @app.route('/')
 @app.route('/home')
 def index():
     return render_template('home.html')
 
+
 @app.route('/create', methods=['GET', 'POST'])
 def createEvents():
     form = EventForm()
     return render_template('createEvent.html', form=form)
+
+
 
 
 if __name__ == '__main__':
