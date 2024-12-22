@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask import Flask
 
+from forms import EventForm
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
@@ -21,6 +23,12 @@ class Event(db.Model):
 @app.route('/home')
 def index():
     return render_template('home.html')
+
+@app.route('/create', methods=['GET', 'POST'])
+def createEvents():
+    form = EventForm()
+    return render_template('createEvent.html', form=form)
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=5000, debug=True)
