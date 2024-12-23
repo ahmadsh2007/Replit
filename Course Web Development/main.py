@@ -32,8 +32,9 @@ class Event(db.Model):
 
 @app.route('/')
 @app.route('/home')
-def index():
-    return render_template('home.html')
+def home():
+    events = Event.query.all()
+    return render_template('home.html', events=events)
 
 
 @app.route('/create', methods=['GET', 'POST'])
@@ -47,7 +48,7 @@ def createEvents():
         db.session.add(event)
         db.session.commit()
 
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     
     return render_template('createEvent.html', form=form)
 

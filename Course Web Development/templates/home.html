@@ -3,5 +3,19 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<p>This is the home page</p>
+
+<h2>Upcoming Events</h2>
+
+<divn id="events">
+    {% for event in events %}
+ 
+        <div class="event">
+            {{ event.title }}
+        </div>
+    
+    {% else %}
+    <p>No events are scheduled.</p>
+    {% endfor %}
+</div>
+
 {% endblock %}
