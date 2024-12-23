@@ -10,7 +10,11 @@
     {% for event in events %}
  
         <div class="event">
-            {{ event.title }}
+            <h3>
+                <a href="{{ url_for('eventDetails', eventID=event.id) }}">
+                    {{ event.title }}
+                </a>
+            </h3>
         </div>
     
     {% else %}

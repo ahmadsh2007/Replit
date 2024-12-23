@@ -36,6 +36,10 @@ def home():
     events = Event.query.all()
     return render_template('home.html', events=events)
 
+@app.route('/event/<int:eventID>')
+def eventDetails(eventID):
+    event = Event.query.get_or_404(eventID)
+    return render_template('eventDetails.html', event=event)
 
 @app.route('/create', methods=['GET', 'POST'])
 def createEvents():
